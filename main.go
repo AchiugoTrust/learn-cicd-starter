@@ -24,7 +24,10 @@ type apiConfig struct {
 //go:embed static/*
 var staticFiles embed.FS
 
-
+func unused() {
+	// this function does nothing
+	// and is called nowhere
+}
 
 func main() {
 	err := godotenv.Load(".env")
@@ -38,8 +41,6 @@ func main() {
 	}
 
 	apiCfg := apiConfig{}
-
-	
 
 	// https://github.com/libsql/libsql-client-go/#open-a-connection-to-sqld
 	// libsql://[your-database].turso.io?authToken=[your-auth-token]
@@ -96,8 +97,6 @@ func main() {
 		Addr:    ":" + port,
 		Handler: router,
 	}
-
-	
 
 	log.Printf("Serving on port: %s\n", port)
 	log.Fatal(srv.ListenAndServe())
